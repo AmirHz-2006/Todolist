@@ -225,4 +225,26 @@ public class TodoList extends JFrame {
             JOptionPane.showMessageDialog(this, "Please select a task to mark."); // پیام خطا
         }
     }
+    //    Alle Aufgaben löschen
+    private void clearAllTasks () {
+        int result = JOptionPane.showConfirmDialog(this,
+                "Are you sure you want to clear all tasks?",
+                "Confirm Clear",
+                JOptionPane.YES_NO_OPTION);
+
+        if (result == JOptionPane.YES_OPTION) {
+            tasks.clear();
+            listModel.clear();
+        }
+    }
+
+    public static void main (String[]args){
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                ToDoList taskApp = new ToDoList();
+                taskApp.setVisible(true);
+            }
+        });
+    }
 }
