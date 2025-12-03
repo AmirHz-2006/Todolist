@@ -148,9 +148,9 @@ public class TodoList extends JFrame {
             if (date != null) {
                 // اعتبارسنجی ساده تاریخ
                 if (date.matches("\\d{4}-\\d{2}-\\d{2}")) {
-                    String taskWithDate = taskField.getText().trim() + " -                     " +
-                            "                       " +
-                            "                       " + date;
+                    String taskWithDate = taskField.getText().trim() + " -      " +
+                            "         " +
+                            "        " + date;
                     tasks.add(taskWithDate);
                     listModel.addElement(taskWithDate);
                     taskField.setText("");
@@ -242,7 +242,7 @@ public class TodoList extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                ToDoList taskApp = new ToDoList();
+                TodoList taskApp = new TodoList();
                 taskApp.setVisible(true);
             }
         });
