@@ -138,4 +138,39 @@ public class TodoList extends JFrame {
         exitButton.addActionListener((ActionEvent e) -> System.exit(0));
         add(mainPanel);;
     }
+    //    Aufgabe hinzufügen
+    private void addTask() {
+        if (taskField != null && !taskField.getText().trim().isEmpty()) {
+            String date = JOptionPane.showInputDialog(this,
+                    "Enter date (YYYY-MM-DD): ",
+                    new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+
+            if (date != null) {
+                // اعتبارسنجی ساده تاریخ
+                if (date.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                    String taskWithDate = taskField.getText().trim() + " -                     " +
+                            "                       " +
+                            "                       " + date;
+                    tasks.add(taskWithDate);
+                    listModel.addElement(taskWithDate);
+                    taskField.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Please use YYYY-MM-DD format (e.g., 2024-01-15)");
+                }
+            }
+        }else {
+            JOptionPane.showMessageDialog(this, "Please enter a task.");
+        }
+    }
+    //    Aufgabe entfernen
+    int selectedIndex;
+    private void removeTask() {
+        selectedIndex = taskList.getSelectedIndex();
+        if (selectedIndex != -1) {
+            tasks.remove(selectedIndex);
+            listModel.remove(selectedIndex);
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a task to remove.");
+        }
+    }
 }
