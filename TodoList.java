@@ -173,4 +173,56 @@ public class TodoList extends JFrame {
             JOptionPane.showMessageDialog(this, "Please select a task to remove.");
         }
     }
+    //    Aufgabe bearbeiten
+    private void editTask() {
+        selectedIndex = taskList.getSelectedIndex();
+        if (selectedIndex != -1) {
+            String currentTask = listModel.getElementAt(selectedIndex);
+            String taskPart = "";
+            if (currentTask.contains(" - ")) {
+                taskPart = currentTask.substring(0, currentTask.indexOf(" - "));
+            }
+            String newTask = JOptionPane.showInputDialog(this, "Edit task: ", taskPart);
+            if (newTask != null && !newTask.trim().isEmpty()) {
+                String date = JOptionPane.showInputDialog(this,
+                        "Enter date (YYYY-MM-DD):",
+                        new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+                if (date != null && date.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                    String taskWithDate = newTask.trim() + " - " + date;
+                    tasks.set(selectedIndex, taskWithDate);
+                    listModel.set(selectedIndex, taskWithDate);
+                } else if (date != null) {
+                    JOptionPane.showMessageDialog(this, "Please use YYYY-MM-DD format (e.g., 2024-01-15)");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a task to edit.");
+        }
+    }
+    //    Aufgabe als etw Gemachtes markieren
+    private void markTaskCompleted() {
+        selectedIndex = taskList.getSelectedIndex();
+        if (selectedIndex != -1) {
+            String currentTask = listModel.getElementAt(selectedIndex);
+            if (!currentTask.endsWith("  [DONE]")) {
+                // Mark as completed
+                String completedTask = currentTask + "  [DONE]";
+                tasks.set(selectedIndex, completedTask);
+                listModel.set(selectedIndex, completedTask);
+
+                // Select the next task
+                if (listModel.size() > 0) {
+                    int newIndex = Math.min(selectedIndex, listModel.size() - 1);
+                    taskList.setSelectedIndex(newIndex);
+                }
+            } else {
+                // Mark as incomplete
+                String incompleteTask = currentTask.replace("  [DONE]" , "");
+                tasks.set(selectedIndex, incompleteTask);
+                listModel.set(selectedIndex, incompleteTask);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a task to mark."); // پیام خطا
+        }
+    }
 }
