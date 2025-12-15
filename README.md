@@ -20,7 +20,7 @@ Ein einfaches Java-Programm zur Verwaltung von Aufgaben mit grafischer Benutzero
 - Java  
 - Swing (JList, JOptionPane, ListModel)  
 - SimpleDateFormat  
-
+- Regex
 ---
 
 ## 📁 Projektstruktur
